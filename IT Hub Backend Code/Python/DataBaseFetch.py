@@ -5,21 +5,27 @@ import csv
 
 def main():
 
-    a = QueryEmpList("select * from employeeinfo")
+    # a = QueryEmpList("select * from employeeinfo")
 
-    b = QueryDeviceList("select * from deviceinfo")
+    # b = QueryDeviceList("select * from deviceinfo")
 
-    c = QueryTicketList("select * from ticket")
+    # c = QueryTicketList("select * from ticket")
 
-    #a[1][0] : Touple of Name
-    #a[1][0][0] String of Name for employeeinfo
-    ToCSV(a,a[1][1][0])
-    #b[1][0] : Touple of Name
-    #b[1][0][0] String of Name for deviceinfo
-    ToCSV(b,b[1][0][0])
-    #c[1][0] : Touple of Name
-    #c[1][0][0] String of Name for deviceinfo
-    ToCSV(c,c[1][2][0])
+    # #a[1][0] : Touple of Name
+    # #a[1][0][0] String of Name for employeeinfo
+    # ToCSV(a,a[1][1][0])
+    # #b[1][0] : Touple of Name
+    # #b[1][0][0] String of Name for deviceinfo
+    # ToCSV(b,b[1][0][0])
+    # #c[1][0] : Touple of Name
+    # #c[1][0][0] String of Name for deviceinfo
+    # ToCSV(c,c[1][2][0])
+
+    functions = {
+        "getEmpInfoPackage":getEmpInfoPackage,
+        "GeneralQuery" : GeneralQuery
+    }
+
 
 #Querying the employeeinfo table in the database and storing in the "employeeinfo.csv" file
 def QueryEmpList(query):
@@ -324,14 +330,76 @@ def TikWriteToDatabase(data):
         elif e.errno == 1452:
             print("Invalid Employee ID")
             
+def getAllEmpName():
+    '''Returns a list of all Employee names that are in the database'''
+    #Connects to Database
+    db = mysql.connector.connect(user='root', password="Turbo50%", # required
+    port=3306,
+    host="127.0.0.1", # required
+    database='company',
+    auth_plugin='caching_sha2_password' # required
+    )
+    QueryList = []
+    #Fetching the Query
+    cursor = db.cursor()
+    cursor.execute("select * from employeeinfo")
+    #Placing the Query into a List
+    for x in cursor:
+        QueryList.append(x[3])
+    return QueryList
+
+def getAllEmpPos():
+    '''Returns a list of all Employee names that are in the database'''
+    #Connects to Database
+    db = mysql.connector.connect(user='root', password="Turbo50%", # required
+    port=3306,
+    host="127.0.0.1", # required
+    database='company',
+    auth_plugin='caching_sha2_password' # required
+    )
+    QueryList = []
+    #Fetching the Query
+    cursor = db.cursor()
+    cursor.execute("select * from employeeinfo")
+    #Placing the Query into a List
+    for x in cursor:
+        QueryList.append(x[2])
+    return QueryList
+
+def GeneralQuery(query):
+    '''Returns a list of all Employee names that are in the database'''
+    #Connects to Database
+    db = mysql.connector.connect(user='root', password="Turbo50%", # required
+    port=3306,
+    host="127.0.0.1", # required
+    database='company',
+    auth_plugin='caching_sha2_password' # required
+    )
+    QueryList = []
+    #Fetching the Query
+    cursor = db.cursor()
+    cursor.execute(query)
+    #Placing the Query into a List
+    for x in cursor:
+        QueryList.append(x[2])
+    return QueryList
+
+def getEmpInfoPackage():
+    data = []
+
+    data.append(getExistingEmpIDs())
+    data.append(getAllEmpName())
+    data.append(getAllEmpPos())
+
+    return data
+
 
 main()
-FromCSV()
-NewEmpWritUp(75,15,"Manager","Roosevelt")
-NewDevWriteUp("2134123","1236fsds",2005,"HP","Envy",75)
-NewTicketWriteUp(1221,"Laptop charger is broken",75,"Important",15,"Repair","IT")
+# FromCSV()
+# NewEmpWritUp(75,15,"Manager","Roosevelt")
+# NewDevWriteUp("2134123","1236fsds",2005,"HP","Envy",75)
+# NewTicketWriteUp(1221,"Laptop charger is broken",75,"Important",15,"Repair","IT")
+# print(getEmpInfoPackage()[0])
+# print(getEmpInfoPackage()[1])
+# print(getEmpInfoPackage()[2])
 
-getExistingEmpIDs()
-
-print(getEmpFromID(15))
-print(getDevFromEmp(15))
