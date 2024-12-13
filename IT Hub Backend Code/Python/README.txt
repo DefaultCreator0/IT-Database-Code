@@ -11,3 +11,7 @@ In the "Database Fetch.py" file the code past line 200 is a rewrite that would a
 code to directly return data and send data from python. 
 Currently looking into integration with react and this code.
 Will also create a more dynamic search method to query the database.
+
+This code uses MySQL library from
+https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html
+All of this code uses python 3.13.0
