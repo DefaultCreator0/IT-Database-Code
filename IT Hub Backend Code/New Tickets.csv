@@ -1,1 +1,1 @@
-TicketID,Location,Department,Requester,Status,Subject,Priority,Group,Agent
+TicketID,Location,Department,Requester,Status,Subject,Description,Priority,Group,Agent
