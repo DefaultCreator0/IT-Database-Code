@@ -6,4 +6,5 @@ cd ".."
 cd "backend"
 start "http://localhost:5173/"
 $env:FLASK_APP="FlaskBackend"
+Start-Sleep -Seconds 3
 py -m flask run

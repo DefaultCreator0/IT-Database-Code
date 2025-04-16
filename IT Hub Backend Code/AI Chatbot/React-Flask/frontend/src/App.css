@@ -3,7 +3,7 @@
     bottom: 20px;
     right: 20px;
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #a70034;
     color: white;
     border: none;
     border-radius: 20px;
@@ -27,7 +27,7 @@
   }
   
   .chat-header {
-    background-color: #007bff;
+    background-color: #a70034;
     color: white;
     padding: 10px;
     border-top-left-radius: 10px;
@@ -53,6 +53,7 @@
   
   .chat-message.bot {
     text-align: left;
+    
   }
   
   .chat-input-container {
@@ -69,4 +70,7 @@
   .chat-input-container button {
     padding: 5px 10px;
   }
-  
+  .SendButton{
+    background-color: #a70034;
+    color: white;
+  }
