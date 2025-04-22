@@ -36,6 +36,7 @@ const Chatbot = () => {
       const httpStartVal=0;
       let link ="";
       let counter =-1;
+      console.log(response.data.type);
       if (response.data.includes("storage.")){
         for(let i = 0;i < response.data.length;i++){
           if(response.data[i].includes(":")){
@@ -50,6 +51,9 @@ const Chatbot = () => {
         console.log(link)
         window.open(link);
         
+      }
+      if(response.data.includes("http://localhost:5173")){
+        window.open("http://localhost:5173");
       }
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {

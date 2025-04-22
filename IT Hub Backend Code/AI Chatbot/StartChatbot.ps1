@@ -1,7 +1,7 @@
 cd "$PSScriptRoot"
 cd "React-Flask"
 cd "frontend"
-start powershell -ArgumentList '-Command "npm run dev'
+start powershell -ArgumentList '-Command "Start-Sleep -Seconds 1; npm run dev'
 cd ".."
 cd "backend"
 start "http://localhost:5173/"
