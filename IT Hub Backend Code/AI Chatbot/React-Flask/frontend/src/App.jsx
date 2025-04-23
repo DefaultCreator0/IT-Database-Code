@@ -43,10 +43,6 @@ const Chatbot = () => {
             counter = i;
             i=i+2;
           }
-          if(response.data[i].includes("-") && response.data[i+1].includes("1")){
-            counter = -1;
-            break;
-          }
           if(counter != -1){
             link = link + response.data[i];
           }
