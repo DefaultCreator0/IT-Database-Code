@@ -33,6 +33,32 @@ const Chatbot = () => {
     try {
       const response = await axios.post("http://localhost:5000/post", { message: input });
       const botMessage = { sender: "AI", text: response.data };
+      const httpStartVal=0;
+      let link ="";
+      let counter =-1;
+      console.log(response.data.type);
+      if (response.data.includes("storage.")){
+        for(let i = 0;i < response.data.length;i++){
+          if(response.data[i].includes(":")){
+            counter = i;
+            i=i+2;
+          }
+          if(response.data[i].includes("-") && response.data[i+1].includes("1")){
+            counter = -1;
+            break;
+          }
+          if(counter != -1){
+            link = link + response.data[i];
+          }
+        }
+        link = "https://"+link;
+        console.log(link)
+        window.open(link);
+        
+      }
+      if(response.data.includes("http://localhost:5173")){
+        window.open("http://localhost:5173");
+      }
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error("Error communicating with the chatbot API", error);
@@ -68,7 +94,7 @@ const Chatbot = () => {
               onKeyPress={(e) => e.key === "Enter" && sendMessage()}
               placeholder="Type a message..."
             />
-            <button onClick={sendMessage}>Send</button>
+            <button className="SendButton" onClick={sendMessage}>Send</button>
           </div>
         </div>
       )}
